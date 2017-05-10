@@ -1,0 +1,6 @@
+绑定class与style
+v-bind:class="{字符值:表达式或者变量}"
+v-bind:class="[a,b,c...f]"
+v-bind:class="[isActive?activeClass:'']"
+
+v-bind:style="" //驼峰式属性！ 语法上面无不同
