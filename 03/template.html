@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>模板语法</title>
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>{{msg}}</div>
+            <div v-html="msg2">{{msg}}</div>
+            <div>{{msg3|capitalize}}</div>
+        </div>
+    </body>
+    <script>
+       new Vue({
+           el:"#app",
+           data:{
+               msg:"字符串而已",//字符
+               msg2:`<span>html片段</span>`,//htmlsg
+               msg3:"abc" //filter 过滤器的数据
+           },
+           filters:{
+               capitalize:function(value){
+                    if(!value){
+                        return;
+                    }
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase()+value.slice(1);
+               }
+           }
+       });
+    </script>
+</html>

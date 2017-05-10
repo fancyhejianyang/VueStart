@@ -1,0 +1,19 @@
+模板语法
+1.数据绑定
+Mustache语法即 双花括号语法
+2.插值 文本/HTML
+纯HTML 会被解释成纯文本，为了保证输出是HTMl，在插入的标签上加入属性v-html="template"
+3.v-bind:attr="some expression"
+4.支持js表达式
+ 
+5.指令是带有v开头的前缀特殊属性
+v-if v-bind v-on
+6.修饰符 半角句号
+通常是事件类 v-on:submit.prevent=""
+
+7.过滤器 文本格式处理
+使用在插值和v-bind表达式中，接到管道符号之后
+过滤器默认第一个参数是前面的数据对象，指定的参数是从第二个开始排，可以串联过滤器
+
+v-bind: 缩写成 :
+v-on:	      @
