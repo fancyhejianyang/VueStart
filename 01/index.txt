@@ -1,0 +1,22 @@
+1.声明式渲染
+使用简洁的模板语法将数据渲染到dom中
+
+2.属性绑定
+自定义title、title2、。。。
+标签上：v-bind:title="message"
+熟悉react的应该类似于：div title="message" message就是js中定义的变量或者对象
+
+3.条件与循环
+这里需要联想到angular中ng-if
+<p v-if="seen">条件判断</p>  <p ng-if="seen"></p>
+
+循环 遍历参照ng2或者ts 语法中理解深刻
+<li v-for="todo in todos">
+	{{todo}}
+</li>
+4.事件操作
+v-on:事件类型=定义的事件名
+v-click="clickHandle"
+
+5.input双向绑定
+v-model=" 属性名" 参照ng中ng-model="属性名"

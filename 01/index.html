@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <title>声明式渲染</title>
         <link rel="stylesheet" href="">
         <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
     </head>
     <body>
         <div id="app">
+            <input type="text" v-bind:value="msg">
             <button v-on:click="tanchuang">click</button>
         </div>
     </body>
     <script>
+        //声明式渲染
+
         var vm = new Vue({
-            el:"#app",
+            el:"#app",//el 一般按照id元素去锁定
+            //data对象中的key value 页面需要展示的数据
+            data:{
+                msg:"嘿嘿"
+            },
+            //methods对象内部定义 你想使用的方法函数
             methods:{
                 tanchuang(){
                     alert();
                 }
             }
         });
+        console.log(vm);
     </script>
 </html>
