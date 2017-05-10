@@ -20,3 +20,10 @@ v-click="clickHandle"
 
 5.input双向绑定
 v-model=" 属性名" 参照ng中ng-model="属性名"
+
+6.组件构建
+组件由组件名称，模板，props（与父级数据交互） 组成
+Vue.component('componentName',{
+	props:[''],
+	template:`html片段和数据的使用`
+});
