@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>生命周期</title>
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{msg}}</p>
+            <input type="text" v-model="msg">
+            <button v-on:click="toDestroy">销毁</button>
+        </div>
+    </body>
+    <script>
+        //完整的生命周期实例
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"嘿嘿"
+            },
+            beforeCreate:function(){
+                alert("我还在初始化");
+            },
+            created:function(){
+                alert("初始化好了");
+            },
+            beforeMount:function(){
+                alert("挂载前");
+            },
+            mounted:function(){
+                alert("挂载完毕");
+            },
+            beforeUpdate:function(){
+                alert("更新完成前");
+            },
+            updated:function(){
+                alert("更新完成");
+            },
+            beforeDestroy:function(){
+                alert("准备销毁实例");
+            },
+            destroyed:function(){
+                alert("销毁完成");
+            },
+            methods:{
+                toDestroy:function(){
+                    console.log(this);
+                    this.$destroy();
+                }
+            }
+        });
+        //可以时刻打印data值来加深理解
+        //销毁之后再次更新都不会触发组件更新因为已经销毁了组件实例
+    </script>
+</html>

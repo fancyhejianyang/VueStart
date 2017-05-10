@@ -1,0 +1,7 @@
+生命周期
+完整阶段划分：
+new Vue()、创建前、创建后、挂载前、挂载后、更新前、更新后、销毁前、销毁后。
+对应的内置事件：
+beforeCreate,created,beforeMount,mounted,beforeUpdate,
+updated,beforeDestroy,destroyed
+
