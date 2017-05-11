@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>表单控件绑定</title>
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <input type="radio" id="male" v-model="sexuality" value="male">
+           <label for="male">男</label>
+           <input type="radio" id="female" v-model="sexuality" value="female">
+           <label for="female">女</label>
+           选择的性别是：{{sexuality}}
+           <!--multiple 可以让列表选择变成选择框-->
+           <select name="" id=""  v-model="selected">
+               <option>红色</option>
+               <option>黄色</option>
+               <option>蓝色</option>
+           </select>
+           喜欢的颜色是：{{selected}}
+           <div>
+               <label>姓名：</label>
+               <input type="text" v-model.lazy="name">
+               <span>鼠标离开我就能看到后面的内容-{{name}}</span>
+           </div>
+        </div>
+    </body>
+    <script>
+       new Vue({
+           el:"#app",
+           data:{
+                sexuality:'',
+                selected:"",
+                name:''
+           }
+       });
+    </script>
+</html>

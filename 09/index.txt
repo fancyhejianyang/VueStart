@@ -1,0 +1,20 @@
+表单数据绑定
+最简单的控件：
+input v-model=""  中间监听用户输入事件的过程不会暴露出来
+适用于textarea
+
+选择列表
+select option
+绑定方式相同
+
+绑定value即想办法将选择的value进行显示
+
+修饰符
+.lazy
+默认表单的绑定都是同步的，如果只想在change中视图更新，使用lazy，输入完后移出input框即可更新
+v-model.lazy=""
+
+.number
+将输入值转换为Number类型，若结果为NaN则原值返回
+.trim
+过滤掉首尾空格
