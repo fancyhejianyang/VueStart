@@ -27,6 +27,7 @@
            <div title="冒泡验证区域" v-on:click="outerDiv" class="bubble">
                <button v-on:click.stop="stopBubble">点我不会冒泡到外层</button>
            </div>
+           <input type="text" v-on:keyup.enter="printValue($event)">
         </div>
     </body>
     <script>
@@ -53,6 +54,9 @@
                 },
                 stopBubble:function(){
                     alert("不会冒泡了！");
+                },
+                printValue:function(event){
+                    alert(event.target.value);
                 }
             }
        });

@@ -18,3 +18,10 @@ v-on:submit.prevent=""阻止页面的重载
 v-on:click.capture=""
 仅当事件在该元素本身触发时触发回调：
 v-on:click.self=""
+
+按键修饰符
+对照keyCode
+v-on:keyup.13=""
+按键别名：
+.enter .tab .detete .esc .space .up .down .left .right
+config.keyCodes对象可以设置别名修饰符
