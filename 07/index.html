@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>列表渲染</title>
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div v-for="item in items">
+                <div>我的名字是{{item.name}}</div>
+            </div>
+            <button v-on:click="updateItems">updata</button>
+        </div>
+    </body>
+    <script>
+       var vm = new Vue({
+           el:"#app",
+           data:{
+               items:[
+                   {name:'Jack'},
+                   {name:'Marry'},
+                   {name:'Lily'}
+               ]
+           },
+           methods:{
+               updateItems:function(){
+                //    this.items[0] = [
+                //        {name:"Rose"}
+                //    ];
+                console.log(vm.$data.items);
+                Vue.set(vm.$data.items, 0, {name:"Rose"})
+                //    this.items.push({name:"Rose"});
+               }
+           }
+       });
+    </script>
+</html>

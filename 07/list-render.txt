@@ -1,0 +1,31 @@
+列表渲染通常是从数组中获取元素个体进行渲染DOM
+v-for="item in items"
+v-for="(item,index) in items"
+ items是在实例中真是存在的数组，其中in可以被of替代
+item of items
+
+items如果是一个键值对对象，可以使用对象的迭代属性
+v-for="value in object"
+object={
+  key:value,
+  key2:value
+}
+
+整数迭代
+v-for="n in 10" 重复10次
+
+key 为每个节点提供一个独立的key :key="item.id"
+
+数组更新检测
+Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
+还有部分属于非变异方法，不会改变原始数组，而是仅仅改变项值
+2种情况无法检测到数组变动
+1.items[index] = newValue;
+2.items.length = newLength;
+
+解决1：Vue.set(vm.$data.items,index,newObj);
+            vm.$data.items.splice(index,1,newObj);
+解决2：同样使用splice(newLength)
+
+显示过滤/排序
+其实就是不改变原数组，借用methods或者计算属性return 你想要的数组
