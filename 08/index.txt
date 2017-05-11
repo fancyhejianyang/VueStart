@@ -1,0 +1,20 @@
+事件处理器
+监听类事件
+v-on:eventType=""
+js执行语句
+方法类事件处理器
+v-on:eventType="methodName"
+也可以加入事件参数$event
+
+事件修饰符
+event.preventDefault();event.stopPropagation()
+这种dom细节 vue提供了事件修饰符处理通过点（.）处理
+.stop() .prevent() .capture() .self() .once()
+v-on:click.stop=""阻止事件冒泡
+v-on:submit.prevent=""阻止页面的重载
+可以串联 v-on:click.stop.prevent=""
+可以只有修饰符 v-on:submit.prevent
+添加事件监听器使用事件捕获模式：
+v-on:click.capture=""
+仅当事件在该元素本身触发时触发回调：
+v-on:click.self=""

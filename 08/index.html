@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>事件处理器</title>
+        <link rel="stylesheet" href="">
+        <style>
+            .bubble{
+                width:100%;
+                height:30px;
+                border:1px solid #ccc;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <button v-on:click="count+=1">当前count={{count}}</button>
+           <button v-on:click="initData">初始化</button>
+           <button v-on:click="setData(3)">指定一个参数</button>
+           <button title="鼠标悬停后看到我" v-on:click="getEvent($event)">鼠标悬停</button>
+           <a href="https://www.baidu.com/">点我到百度</a>
+           <a href="https://www.baidu.com/" v-on:click.prevent>点我也不会跳转</a>
+           <div title="冒泡验证区域" v-on:click="outerDiv" class="bubble">
+               <button v-on:click="innerButton">点我也会冒泡到外层哦</button>
+           </div>
+           <div title="冒泡验证区域" v-on:click="outerDiv" class="bubble">
+               <button v-on:click.stop="stopBubble">点我不会冒泡到外层</button>
+           </div>
+        </div>
+    </body>
+    <script>
+       new Vue({
+            el:"#app",
+            data:{
+                count:0
+            },
+            methods:{
+                initData:function(){
+                    this.count = 0;
+                },
+                setData:function(n){
+                    this.count = n;
+                },
+                getEvent:function(event){
+                    alert(event.target.title);
+                },
+                innerButton:function(){
+                    alert("内部button");
+                },
+                outerDiv:function(){
+                    alert("外部DIV");
+                },
+                stopBubble:function(){
+                    alert("不会冒泡了！");
+                }
+            }
+       });
+    </script>
+</html>
