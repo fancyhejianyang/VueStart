@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>组件通信一</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <my-component name="第一个"></my-component>
+           <my-text v-bind:text="initWord" v-on:updateText="hasChanged"
+           v-on:click.native="componentClick"></my-text>
+           <br>
+           <!--组件绑定原生事件-->
+           <button v-on:click="getPreData">获取原始数据值</button>
+        </div>
+    </body>
+    <script>
+       Vue.component('my-component',{
+            props:['name'],
+            template:`<p>{{name}}组件模板{{count}}</p>`,
+            data:function(){
+                return {
+                    count:0
+                }
+            }
+       });
+       //该组件使用了父级数据，也涉及到修改数据，但是不会改变原数据
+       //注意props的处理
+       //props 验证类型
+       Vue.component('my-text',{
+            props:{
+                "text":{
+                    type:String,
+                    required:true
+                }
+            },
+            template:`
+                <div>
+                    <span>{{childText}}</span>
+                    <button v-on:click="updateText">update</button>
+                </div>
+            `,
+            data:function(){
+                return {
+                    childText:this.text
+                }
+            },
+            methods:{
+               updateText:function(){
+                   this.childText = "更新后的文字";
+                //    console.log(this.$parent.hasChanged());
+                   this.$emit("hasChanged");
+               }
+           }
+       });
+       new Vue({
+           el:"#app",
+           data:{
+               initWord:"初始文字"
+           },
+           methods:{
+               getPreData:function(){
+                   alert(this.initWord);
+               },
+               hasChanged:function(){
+                   this.initWord = "重新初始化";
+                   alert("已截获更新传递");
+               },
+               componentClick:function(){
+                   alert("组件上的原生click事件");
+               }
+           }
+       });
+    </script>
+</html>

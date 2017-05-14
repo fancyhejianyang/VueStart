@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>组件通信三</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="something">
+            <div>使用v-model的方式绑定的值：{{something}}</div>
+            input事件的方式：
+            <input type="text" v-bind:value="anything" v-on:input="inputHandle($event)">
+            <div>使用input事件实现双向绑定：{{anything}}</div>
+            组件的双向绑定：
+            <my-input v-model="someNum"></my-input>
+            <div>组件内部实现双绑更新的值：{{someNum}}</div>
+        </div>
+    </body>
+    <script>
+       Vue.component('my-input',{
+           props:['value'],
+            template:`
+                <div>
+                    <input type="text" v-bind:value="value" v-on:input="updateValue($event.target.value)"/>
+                </div>
+            `,
+            methods:{
+                updateValue:function(val){
+                    this.$emit('input',val);
+                }
+            }
+       });
+
+       new Vue({
+           el:"#app",
+           data:{
+               something:"这是v-model 绑定的变量值",
+               anything:"这是事件方式绑定的value",
+               someNum:5
+           },
+           methods:{
+               inputHandle:function(event){
+                   this.anything = arguments[0].target.value;
+               }
+           }
+       });
+    </script>
+</html>

@@ -1,0 +1,75 @@
+组件功能
+注册：
+Vue.component(tagName,option);
+上述是全局组件，非全局组件注册：
+var child = {
+   template:``
+};
+new Vue({
+ components:{
+  'my-component':child
+ }
+});
+#DOM 模板解析说明
+某些标签下，会有解析的限制，模板无法被解析，table ul ol select option 等，变通做法是使用能被解析的标签添加is属性
+is="my-component"
+
+组件的data值必须是一个函数，否则报错
+
+构成组件
+组件协调工作时候难免遇到数据的传递，即所说的通信
+在 Vue.js 中，父子组件的关系可以总结为 props down, events up 。父组件通过 props 向下传递数据给子组件，子组件通过 events 给父组件发送消息。
+对于组件来说父级就是自定义标签层
+<my-component name="first"><my-component/>
+props:['name'],
+template:`<span>{{name}}</span>`
+注意：驼峰命名的属性名字要用-隔开
+如：props:["helloWorld"] =>hello-world="xxx"
+动态绑定的方法：v-bind:propName="xxx"
+
+字面量语法传递数值
+some-prop="1" x
+v-bind:some-prop="1" √
+
+单向数据流
+react一样，数据从上至下流动，无法直接修改导致改变原数据，可以借助重新创建局部作用域的变量接住，修改局部的。
+也可以使用computed计算属性
+若prop是数组或者对象类型，修改时候会影响原状态
+
+prop验证：react中也有的一种机制
+
+格式：props:[
+  propName:Type,
+  propName2:[Type1,Type2],
+  propName3:{
+     type:String,
+     required:true
+   }
+]
+type 可以是原生的构造器，也可以是自定义构造函数
+
+自定义事件传递数据给父组件
+核心事件$emit('name')
+//demo中未实现 需要再仔细研究
+
+组件绑定原生事件
+v-on:eventType.native="someName"
+
+.sync修饰符
+2.x 版本后重新加入该修饰符 作为编译时的语法糖，被扩展为一个自动更新父组件属性的v-on监听器，实现双向绑定
+需要版本2.3的vuejs ***
+<comp :foo.sync="bar"></comp>
+methods:{
+                updateProp:function(){
+                    this.$emit('update:foo','已更新');
+                }
+            }
+
+demo3
+分解了v-model="something" 的过程
+借用拆分的原理移植到组件上实现类表单组件的双绑。
+记住一点：组件实现双绑也要通知更新，而不是直接更改，所以
+$emit()会很常见
+
+
+
