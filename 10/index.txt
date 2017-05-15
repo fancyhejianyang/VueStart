@@ -108,3 +108,13 @@ p标签不会生效
             </bye-component>
 组件内部有：
 slot name="header"的配置对
+作用域插槽
+一种特殊类型的插槽，也可以配合具名属性
+<bye-component>
+                <template scope="prop">
+                    <span>我是template下的元素</span>
+                    <span>{{prop.title}}</span>
+                </template>
+            </bye-component>
+组件源码：
+<slot title="我是要传递给组件外部的字符串"></slot>

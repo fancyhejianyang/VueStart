@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>作用域 slot</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <bye-component>
+                <template scope="prop">
+                    <span>我是template下的元素</span>
+                    <span>{{prop.title}}</span>
+                </template>
+            </bye-component>
+        </div>
+    </body>
+    <script>
+        //组件模板嵌套使用
+        Vue.component('bye-component',{
+            template:`
+                <div>
+                    我是bye-component的内容
+                    <br>
+                    <slot title="我是要传递给组件外部的字符串"></slot>
+                </div>
+            `
+        });
+        new Vue({
+            el:"#app",
+
+        });
+    </script>
+</html>
