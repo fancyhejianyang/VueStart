@@ -8,18 +8,50 @@
     </head>
     <body>
         <div id="app">
-            
+            <com-one v-model="words"></com-one>
+            <p>点击按钮监听开始</p>
+            <com-two></com-two>
         </div>
     </body>
     <script>
-       Vue.component('my-input',{
-           
+        var vm = new Vue();
+       Vue.component('com-one',{
+           props:['myAttr'],
+           template:`
+                <div>
+                    <input type="text"  v-bind:value="myAttr" v-on:input="updateVal($event.target.value)"/>
+                </div>
+           `,
+           methods:{
+               updateVal:function(val){
+                    this.$emit('input',val);
+                    vm.$emit('input',val);
+               }
+           }
        });
-
+       Vue.component('com-two',{
+            template:`
+                <div>
+                    <button v-on:click="getOtherComponent">获取其他组件的输入信息</button>
+                </div>
+            `,
+            data:function(){
+                return {
+                    data:'init'
+                }
+            },
+            methods:{
+                getOtherComponent:function(){
+                    vm.$on('input',function(val){
+                       alert(val);
+                    })
+                }
+            }
+       });
        new Vue({
            el:"#app",
            data:{
-               
+               words:"父组件的初始数据"
            },
            methods:{
                

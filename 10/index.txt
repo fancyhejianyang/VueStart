@@ -71,5 +71,28 @@ demo3
 记住一点：组件实现双绑也要通知更新，而不是直接更改，所以
 $emit()会很常见
 
+非父子间的组件通信
+简单场景下通过一个空的vue实例作为中央事件总线
+获取别的组件数据,复杂场景需要专门的状态管理模式
 
+Slot分发内容
+<app>
+  <app-header></app-header>
+  <app-footer></app-footer>
+</app>
+父子组件可能都有自己的模板，需要指定一种方式去混合模板，过程称为内容分发
+使用<slot>元素作为原始内容的插槽
 
+#编译作用域
+在内容分发API之前，需要明确内容在哪个作用域编译
+<child-component>
+{{message}}
+</child-component>
+组件只能使用自己的作用域内，父组件不应该使用子组件
+
+single Slot 
+
+<hello-component>
+     <p>我是一些内容</p>
+</hello-component>
+hello-component默认会被p标签替代

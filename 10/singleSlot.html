@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>单个slot</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <hello-component>
+                <p>我是一些内容</p>
+            </hello-component>
+            <bye-component>
+                <div>这段文字会出现slot的地方而不一定是第一行</div>
+            </bye-component>
+        </div>
+    </body>
+    <script>
+        //组件模板嵌套使用
+        Vue.component('hello-component',{
+            template:`
+                <div>
+                    我是hello-component的内容
+                </div>
+            `
+        });
+        Vue.component('bye-component',{
+            template:`
+                <div>
+                    我是bye-component的内容
+                    <slot>父组件渲染内容</slot>
+                </div>
+            `
+        });
+        new Vue({
+            el:"#app",
+
+        });
+    </script>
+</html>
