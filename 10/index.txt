@@ -95,4 +95,16 @@ single Slot
 <hello-component>
      <p>我是一些内容</p>
 </hello-component>
-hello-component默认会被p标签替代
+p标签不会生效
+
+某些情况需要我们添加的内容显示
+需要在组件定义时候写slot标签，他相当于设定了一个节点存放来自父组件的内容
+
+具名slot 
+给slot元素加个特殊的属性name来配置如何分发
+<bye-component>
+                <h1 slot="footer">我是footer的slot</h1>
+                <h2 slot="header">我是header的slot</h2>
+            </bye-component>
+组件内部有：
+slot name="header"的配置对
