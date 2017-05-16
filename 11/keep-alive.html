@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>动态组件</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <keep-alive>
+                <component v-bind:is="currentView"></component>
+            </keep-alive>
+            <button v-on:click="toggleComponent">update component</button>
+        </div>
+    </body>
+    <script>
+       new Vue({
+           el:"#app",
+           data:{
+                currentView:'home'
+           },
+           components:{
+               home:{
+                   template:`<div>
+                                <span>欢迎来到我的主页</span>
+                            </div>`
+               },
+               posts:{
+                   template:`
+                    <div>
+                        <span>提交页面</span>
+                    </div>
+                   `
+               }
+           },
+           methods:{
+               toggleComponent:function(){
+                   this.currentView = 'posts';
+               }
+           }
+       });
+    </script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>内联模板</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <my-component inline-template>
+               <div>我是内联的模块</div>
+           </my-component>
+        </div>
+    </body>
+    <script>
+       Vue.component('my-component',{
+           template:`
+            <div>
+                <span>我是组件内部的原始模板</span>
+            </div>
+           `
+       });
+       new Vue({
+           el:"#app",
+       });
+    </script>
+</html>

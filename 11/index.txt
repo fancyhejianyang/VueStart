@@ -1,0 +1,68 @@
+动态组件 切换
+使用component 元素动态绑定is特性，控制这个特性值实现切换挂载点
+
+js中实例vue ：
+components:{
+   componentA:{
+     template:""	
+    }
+     ...
+}
+html中：
+<component v-bind:is="componentName"></component>
+
+如果使用keep-alive 包裹，切换过程中，已经出现过的组件不会重新渲染，状态都会保留在了内存中。
+
+杂项
+即组件复用要定义清晰的接口，Props，Events，Slots
+
+子组件索引
+js中直接访问子组件
+可以使用ref给组件指定一个id
+<div id="parent">
+  <user-profile ref="profile"></user-profile>
+</div>
+
+var parent = new Vue({ el: '#parent' })
+// 访问子组件
+var child = parent.$refs.profile
+
+异步组件
+大型应用中拆分的各个组件按需从服务器下载
+webpack的代码分割功能配合使用demo无
+
+高级异步组件
+
+组件命名约定
+推荐驼峰和带横杠的命名
+
+递归组件
+组件在自己的模板内调用自己，仅当有name属性时候
+
+组件间的循环引用
+A B 两个组件有关联，但总有一个不是必须的，具体文档说的很细，demo后期补充
+
+内联模板
+组件上添加属性inine-template
+
+<my-component inline-template>
+               <div>我是内联的模块</div>
+</my-component>
+
+X-Templates
+一种定义模板的新方式
+在javascript标签使用text/x-template类型 指定一个id
+
+<script type="text/x-template" id="hello-world-template">
+	<p>hello world</p>
+</script>
+
+Vue.component('hello-world',{
+	template:"#hello-world-template"
+});
+
+对低开销的静态组件使用
+大量静态内容的组件使用时使用v-once将渲染结果缓存起来
+Vue.component('name',{
+	template:"<div v-once></div>"
+});
