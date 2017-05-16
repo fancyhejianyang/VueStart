@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>深层响应式原理</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           <div>{{express}}</div>
+           <div v-if="ob.key1">我是key1 但是不会渲染更新</div>
+           <div v-if="ob.key2">我是最新的key2 因为set方式添加所以添加即更新</div>
+           <div v-if="ob.a">我是对象全替换</div>
+           <button onClick="addAttr()">使用已经创建的VUE实例添加响应属性</button>
+           <br>
+           <button onClick="setAttr()">Vue设置添加</button>
+           <button onClick="replaceData()">对象替换添加</button>
+        </div>
+    </body>
+    <script>
+        //变化检测问题
+        // Vue 不允许在已经创建的实例上动态添加新的根级响应式属性(root-level reactive property)。然而它可以使用 Vue.set(object, key, value)
+       let vm = new Vue({
+           el:"#app",
+           data:{
+               express:"hello world",
+               ob:{
+
+               }
+           },
+           methods:{
+               
+           }
+       });
+       function addAttr(){
+            vm.ob.key1 = "VUE实例添加响应属性";
+       }
+       function setAttr(){
+            // Vue.set(vm.ob,'key2','vue设置属性添加');
+            vm.$set(vm.ob,'key2','vue设置属性添加');
+       }
+       function replaceData(){
+            vm.ob = Object.assign({}, this.someObject, { a: 1, b: 2 });
+       }
+    </script>
+</html>
