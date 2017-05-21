@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>过渡效果</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+        <style>
+            .hhh-enter-active, .hhh-leave-active {
+                transition: opacity .5s
+            }
+            .hhh-enter, .hhh-leave-active {
+                opacity: 0
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+           <button v-on:click="changeState">改变状态</button>
+           <transition name="hhh">
+               <p v-if="show">注意我的切换效果</p>
+           </transition>
+        </div>
+    </body>
+    <script>
+        
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                message:"not updated",
+                show:true
+            },
+            methods:{
+                upadateMessage:function(){
+                    this.message = "updated";
+                },
+                changeState:function(){
+                    this.show=!this.show;
+                }
+            }
+        });
+    </script>
+</html>

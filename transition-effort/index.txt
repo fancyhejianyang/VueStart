@@ -1,0 +1,83 @@
+过渡效果
+dom更新中提供反映的效果
+在 CSS 过渡和动画中自动应用 class
+可以配合使用第三方 CSS 动画库，如 Animate.css
+在过渡钩子函数中使用 JavaScript 直接操作 DOM
+可以配合使用第三方 JavaScript 动画库，如 Velocity.js
+
+单元素/组件 的过度
+适用情形：
+条件渲染，条件展示，动态组件，组件根节点
+<button v-on:click="changeState">改变状态</button>
+           <transition name="fade">
+               <p v-if="show">注意我的切换效果</p>
+           </transition>
+需要添加样式：
+.fade-enter-active, .fade-leave-active {
+                transition: opacity .5s
+            }
+            .fade-enter, .fade-leave-active {
+                opacity: 0
+            }
+enter leave是进入的开始状态；active是最终状态
+前缀由 name=""决定
+transition 元素会在改变状态切换过程中添加和删除css类名
+
+css动画
+demo中属于标准写法 另外相关类名实在动画结束后才会删除
+
+自定义过度类名(custorm)
+优先级高于普通类名，配合第三方css动画库结合使用十分好。
+类型：
+enter-class;enter-active-class;leave-class;leave-active-class
+值为animate动画库中的动画效果如：
+bounceOutRight
+
+同时使用Transitions 和 Animations
+在某些特定场景中同时设置了animate和transform,但是
+2种并不是同时结束，此时需要设置type特性并设置animate或者Transition来明确你需要Vue监听的类型
+
+javascript 钩子
+
+在属性中声明js钩子
+demo具体已经写好写法（操作样式常用）
+
+初始渲染的过渡
+可以通过appear特性设置节点在初始渲染的过渡
+//尝试切换时候无法表现，只有刷新才会有这种属性生效的表现，未确定
+<transition
+  appear
+  appear-class="custom-appear-class"
+  appear-active-class="custom-appear-active-class"
+>
+  <!-- ... -->
+</transition>
+自定义js钩子
+//经过js 钩子对比发现此效果只是初始化一次性的效果不存在状态切换可见
+
+<transition
+  appear
+  v-on:before-appear="customBeforeAppearHook"
+  v-on:appear="customAppearHook"
+  v-on:after-appear="customAfterAppearHook"
+>
+  <!-- ... -->
+</transition>
+
+多个元素的过渡
+原生标签使用v-if/v-else
+遇到相同标签时候要添加不同的key属性值区分（是个好习惯）
+特殊场景下可以实现绑定一个key实现单个元素过渡
+
+过渡模式
+demo中点击按钮可以很明显看到交互过程中的不正常先想，位置似乎移动了。文档中指出这是一个过渡的离开和另外一个过渡的开始恰好在同时发生，http://cn.vuejs.org/v2/guide/transitions.html#多个元素的过渡 细化的过程
+所以，VUE提供了过渡模式
+in-out:新元素过渡，完成之后当前元素过渡离开
+out-in:当前元素过渡，完成后新元素过渡开始
+mode="in-out"
+
+多个组件的过渡
+比较简单使用动态组件即可：
+<transition name="component-fade" mode="out-in">
+  <component v-bind:is="view"></component>
+</transition>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>多组件的过渡</title>
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+        <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+       
+    </head>
+    <body>
+        <div id="app">
+            <label for="">
+                <input type="radio" name="component" value="v-a" @click="setComponent($event)">A
+                <input type="radio" name="component" value="v-b" @click="setComponent($event)">B
+            </label>
+            <transition mode="out-in">
+                <component v-bind:is="currentComponent"></component>
+            </transition>
+        </div>
+    </body>
+    <script>
+        
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                currentComponent:'v-a'
+            },
+            methods:{
+                setComponent:function(e){
+                    this.currentComponent = e.target.value;
+                }
+            },
+            components:{
+                'v-a':{
+                    template:`<div>Component A</div>`
+                },
+                'v-b':{
+                    template:`<div>Component B</div>`
+                }
+            }
+        });
+    </script>
+</html>
