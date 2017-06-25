@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>列表的位移过渡</title>
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+        <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+    </head>
+    <style>
+    .flip-list-move {
+        transition: transform 1s;
+    }
+    </style>
+    <body>
+        <div id="flip-list-demo" class="demo">
+            <button v-on:click="shuffle">Shuffle</button>
+            <transition-group name="flip-list" tag="ul">
+                <li v-for="item in items" v-bind:key="item">
+                {{ item }}
+                </li>
+            </transition-group>
+        </div>
+    </body>
+    <script>
+        new Vue({
+            el: '#flip-list-demo',
+            data: {
+                items: [1,2,3,4,5,6,7,8,9]
+            },
+            methods: {
+                shuffle: function () {
+                this.items = _.shuffle(this.items)
+                }
+            }
+        })
+    </script>
+</html>

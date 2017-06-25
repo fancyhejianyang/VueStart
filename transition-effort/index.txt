@@ -81,3 +81,30 @@ mode="in-out"
 <transition name="component-fade" mode="out-in">
   <component v-bind:is="view"></component>
 </transition>
+
+列表过渡
+同时渲染整个列表使用transition-group
+该组件特点：
+会以真实的元素呈现，默认span；可以使用tag特性更换；内部元素总是需要一个唯一的key值
+
+属性name="item"
+则：必然有
+item-enter,item-enter-active ,对应还有leave的一组class
+
+列表的进入和离开
+demo中可以发现添加和移除元素时候周围元素会瞬间移动到新位置而非平滑过渡
+列表的位移
+transition-group组件还有个特殊之处，就是可以改变定位，使用该功能仅需使用新增的v-move特性，用name属性定义前缀或者move-class手动设置
+例如：
+transition-group name="flip-list"
+
+则css 要写形如
+flip-list-move:{
+
+}
+注意点：
+FLIP的元素不能设置inline属性
+
+列表的渐进过渡：
+通过data属性与js通信，实现列表的渐进过渡（形似百度搜索关键字输入的过程与结果动态的样子，其实不同，表现效果罢了）
+

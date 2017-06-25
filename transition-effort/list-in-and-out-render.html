@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>列表的进入和离开过渡</title>
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+        <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+        <style>
+            .list-item {
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .list-enter-active,.list-leave-active{
+                transition: all 1s;
+            }
+            .list-enter,.list-leave{
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="addItem">add</button>
+            <button @click="removeItem">remove</button>
+            <transition-group name="list" tag="p" class="list-item">
+                <span v-for="(item,index) of items" v-bind:key="item">
+                    {{item}}
+                </span>
+            </transition-group>
+            <div>
+                列表变化时候伴随着位置变化，即新内容出现前。位置已经体现了移动
+            </div>
+        </div>
+    </body>
+    <script>
+        
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                items:[1,2,3,4,5,6],
+                nextNum:7
+            },
+            methods:{
+                randomIndex:function(){
+                    return Math.floor(Math.random()*this.items.length);
+                },
+                addItem:function(){
+                    this.items.splice(this.randomIndex(),0,this.nextNum++);
+                },
+                removeItem:function(){
+                    this.items.splice(this.randomIndex(),1)
+                }
+            }
+        });
+    </script>
+</html>
