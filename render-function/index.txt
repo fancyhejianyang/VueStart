@@ -28,5 +28,14 @@ html标签字符串或者返回值是string类型/Object的函数，必要属性；
 		}
 	})
 ]
-这段官方没有具体例子所以不是很明白它的意思
+
 render-3
+深入data object参数
+render demo-4
+主要围绕data object 进行演示
+完整属性：https://cn.vuejs.org/v2/guide/render-function.html#基础
+
+约束
+VNodes必须唯一
+不合法演示：
+return createElement('div',[ myParagraphVNode,myParagraphVNode    ])
