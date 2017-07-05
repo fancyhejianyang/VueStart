@@ -38,4 +38,10 @@ render demo-4
 约束
 VNodes必须唯一
 不合法演示：
-return createElement('div',[ myParagraphVNode,myParagraphVNode    ])
+return createElement('div',[ myParagraphVNode,myParagraphVNode    ]) 虽然也能展示多组元素，但是违背了框架准则
+推荐工厂函数方式
+Array.apply(null,{length:100}).map(function(){return //元素})
+
+使用javascript 代替模板功能
+v-if v-for v-model
+render-function

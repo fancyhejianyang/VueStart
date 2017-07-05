@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Render javascript代替模板功能</title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id="App">
+            <!--<ul v-if="items.length">
+                <li v-for="item in items">{{item.name}}</li>
+            </ul>-->
+            <my-template v-bind:items="meteData"></my-template>
+            <my-input></my-input>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    <script>
+        Vue.component('my-template',{
+            render:function(createElement){
+                console.log(this.items);
+                if(this.items.length){
+                    return createElement('ul',this.items.map(
+                        function(item){
+                            return createElement('li',item.name)
+                        }
+                    ))
+                }else{
+                    return createElement('p',"items not found!")
+                }
+            },
+            props:{
+                items:{
+                    type:Array,
+                    required:true
+                }
+            }
+        });
+        //实现v-model
+        Vue.component('my-input',{
+            render:function(createElement){
+                var self = this;
+                return createElement('input',{
+                    domProps:{
+                        value:self.value
+                    },
+                    on:{
+                        input:function(event){
+                            console.log(event.target.value);
+                            console.log(self.value);
+                            self.value = event.target.value;
+                            self.$emit('input',event.target.value);
+                        }
+                    }
+                })
+            }
+        });
+        new Vue({
+            el:"#App",
+            data:{
+                meteData:[{name:'Jack'},{name:'Amy'}]
+            }
+        });
+    </script>
+</html>
