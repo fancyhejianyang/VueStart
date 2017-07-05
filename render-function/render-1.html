@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Render</title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id="App">
+            <my-template :name="1 "></my-template>
+        </div>
+        <script type="text/x-template" id="myTemplate">
+            <div>
+                <h1 v-if="name===1">
+                    <slot>hello</slot>
+                </h1>
+                <h2 v-if="name===2">
+                    <slot>world</slot>
+                </h2>
+            </div>
+        </script>
+    </body>
+    <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    <script>
+        Vue.component('my-template',{
+            template:'#myTemplate',
+            props:{
+                name:{
+                    type:Number,
+                    required:true
+                }
+            }
+        });
+        new Vue({
+            el:"#App"
+        });
+    </script>
+</html>

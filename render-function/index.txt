@@ -1,0 +1,32 @@
+Render函数
+js模板创建HTML(基本写法)
+<script type="text/x-template" id="template">
+	html...
+</script>
+demo render-1
+
+demo render-2 主要关注点是假如都是显示子组件的阵列，场景比较特殊createElement参数 用于生成模板
+语法：
+Vue.component('component-name',{
+	render:function(createElement){
+		return createElement(//)
+	}
+});
+{String|Object|Function}
+html标签字符串或者返回值是string类型/Object的函数，必要属性；
+｛Object｝
+一个包含模板相关属性的数据对象，template中可以使用的属性，可选；
+｛String|Array｝
+官方注解：
+子节点（VNodes）由createElement（）构建而成，或者简单的使用字符串来生成“文本节点”，可选，写法如下：
+[
+	'先写一些文字',
+	createElement('h1','一则头条'),
+	createElement(MyComponent,{
+		props:{
+			someProp:'foobar'
+		}
+	})
+]
+这段官方没有具体例子所以不是很明白它的意思
+render-3

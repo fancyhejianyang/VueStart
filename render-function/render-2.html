@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Render</title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id="App">
+            <my-template :name="1 ">hello world</my-template>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    <script>
+        Vue.component('my-template',{
+            render:function(createElement){
+                return createElement(
+                    'h'+this.name,//tag name
+                    this.$slots.default  //子组件中阵列
+                )
+            },
+            props:{
+                name:{
+                    type:Number,
+                    required:true
+                }
+            }
+        });
+        new Vue({
+            el:"#App"
+        });
+    </script>
+</html>
