@@ -56,3 +56,23 @@ this.$scopedSlots 中获得能用作函数的作用域插槽 官方说的比较紧凑，具体还是对照dem
 render-slots
 
 JSX
+需要下载babel plugin插件
+
+函数化 组件
+https://cn.vuejs.org/v2/guide/render-function.html#JSX
+组件上的一切都是通过上下文传递
+包括：
+props：提供props的对象
+children：VNode 子节点的数组
+slots：slots对象
+data：传递给组件的data对象
+parent：对父组件的引用
+listeners：（2.3.0+）一个包含了组件上所注册的v-on监听器对象，这只是一个指向data.on的别名
+injections：（2.3.0+）使用了该选项，则该对象包含了应该被注入的属性
+
+在添加functional：true后，原本的render函数会更新，增加一个参数context；this.$slots.default=>context.children 绑定的属性level获取变成 context.props.level，因为不具备实例化也就是this
+且函数化组件不会在vue调试工具中出现
+
+slots（） 与 children 对比
+functional-component
+children会显示全部子组件阵列，slots可以根据具名分发控制
