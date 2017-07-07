@@ -45,3 +45,14 @@ Array.apply(null,{length:100}).map(function(){return //元素})
 使用javascript 代替模板功能
 v-if v-for v-model
 render-function
+事件 & 按键修饰符
+传送门：http://www.cnblogs.com/meiyh/p/6593462.html
+如 事件捕获对应前缀是 ！ 则使用写法：on:{ '!click':function(){}}
+其他的修饰符直接在事件处理函数中使用 event.stopPropagation()
+
+$slots
+从this.$slots中获取VNodes列表中的静态内容
+this.$scopedSlots 中获得能用作函数的作用域插槽 官方说的比较紧凑，具体还是对照demo
+render-slots
+
+JSX

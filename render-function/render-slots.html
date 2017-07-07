@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Render $slots</title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id="App">
+            <my-template :name="1 ">
+                <slot>how are you ?</slot>
+            </my-template>
+            <my-reaction msg="jack">
+                <template scope="props">
+                    <slot>{{props.msg}}</slot>
+                </template>
+            </my-reaction>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    <script>
+        Vue.component('my-template',{
+            render:function(createElement){
+                // console.log(this.$slots);
+                return createElement('div',this.$slots.default);
+            },
+            props:{
+                name:{
+                    type:Number,
+                    required:true
+                }
+            }
+        });
+        Vue.component('my-reaction',{
+            render:function(createElement){
+                console.log(this.$scopedSlots);
+                return createElement('div',[
+                    this.$scopedSlots.default({text:'特么没看懂',msg:'这里整体就是个props'}),
+                    // '特么没看懂？？？'
+                ])
+            }
+        });
+        new Vue({
+            el:"#App",
+            data:{
+                msg:'fine'
+            }
+        });
+    </script>
+</html>
