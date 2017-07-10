@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>自定义指令</title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div id="App">
+            <input v-focus>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/vue/2.3.0/vue.js"></script>
+    <script>
+        //使用方法是 v-directiveName
+        Vue.directive('focus',{
+            //当绑定元素插入到DOM中
+            inserted:function(el){
+                //聚集元素
+                el.focus()
+            }
+        });
+        new Vue({
+            el:"#App"
+        });
+    </script>
+</html>
