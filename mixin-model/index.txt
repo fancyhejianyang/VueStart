@@ -1,0 +1,27 @@
+混合
+基础
+混合是一种灵活的分布式复用Vue组件的方式，混合对象可以包含任意组件选项。以组件使用混合对象时，所有混合对象的选项江北混入该组件的本身选项。
+使用方法是定义混合对象，包括结构、方法，然后组件写法：
+var Compnent = Vue.extend({
+	mixins:[ myMixin ]
+})
+var component = new Component();
+demo中只是展示了js中的执行情况未配合html具体实现，我在后期均会处理。
+
+选项合并
+
+当组件选项和混合对象含有同名选项时，这些选项将以恰当的方式混合。比如，同名钩子函数将混合为一个数组，因此均会被调用，值得注意的是，混合对象的钩子函数先于组件自身钩子函数调用
+值为对象的选项，例如methods，components ，directives 将被混为同一个对象，键名重复取组件对象的。
+
+全局混合
+也可以全局注册混合对象，使用注意！一旦使用全局混合对象，将会影响到所有之后创建的Vue实例，使用恰当时，可以为自定义对象注入处理逻辑。
+Vue.mixin({//})
+new Vue({//自定义对象})
+
+自定义选项合并策略
+自定义选项将使用默认策略，即简单的覆盖原有值。如果想让自定义选项以自定义逻辑混合，可以向
+Vue.config.optionMergeStrategies 添加一个函数
+
+对于大多数对象选项，可以使用methods 的合并策略
+var strategies = Vue.config.optionMergeStrategies
+strategies.myOption = strategies.methods （无demo）
