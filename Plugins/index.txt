@@ -1,0 +1,19 @@
+插件
+开发插件
+插件通常为Vue添加全局功能，一般如下几种：
+1.添加全局方法或者属性，如 vue-element
+2.添加全局资源：vue-touch
+3.通过全局mixin方法添加一些组件选项，如：vuex
+4.添加Vue的实例方法，通过把他们添加到Vue.prototype实现
+5.一个库，提供自己的api，同时提供上面的一个或者多个功能如：vue-router
+
+vue.js的插件应当有一个公开方法 install，方法的第一个参数是Vue构造器，第二个参数是可选的选项对象
+MyPlugin.install = function ( Vue,options ) {
+	//添加属性 资源 方法 。。。
+ }
+使用插件
+通过全局方法Vue.use()
+Vue.use(MyPlugin)；
+也可以传入一个选项对象
+Vue.use( MyPlugin,{ someOption:true })
+该方法会自动阻止注册相同的插件多次，届时只会注册一次
