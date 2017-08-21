@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>状态管理</title>
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app1">
+           <input type="text" v-model="myValue">
+           <div>{{myValue}}</div>
+        </div>
+        <div id="app2">
+            <div>{{myValue}}</div>
+            <button v-on:click="clickHandle">-</button>
+        </div>
+    </body>
+    <script>
+        var sourceOfTruth = {
+            myValue:''
+        };
+        let vm = new Vue({
+            el:"#app1",
+            data:sourceOfTruth
+        });
+        let vm2 = new Vue({
+            el:"#app2",
+            data:sourceOfTruth,
+            methods:{
+                clickHandle:function(){
+                    this.$data.myValue--;
+                }
+            }
+        })
+    </script>
+</html>
